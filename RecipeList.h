@@ -7,7 +7,7 @@ public:
 //Declaration
   RecipeList();
 //setters
-  void addRecipe(std::string rName);
+  void addRecipe();
   void removeRecipe(std::string rName);
   void changeRecipe(int select);
 
@@ -15,6 +15,10 @@ public:
   int recipeAmount();
   bool listFull();
   bool listEmpty();
+  Recipe* getCurrentRecipe();
+  Recipe* getNextRecipe();
+  Recipe* getPreviousRecipe();
+  //Sort recipe by name
   //Search through recipes
 private:
   std::vector<Recipe> listRecipe;

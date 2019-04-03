@@ -1,9 +1,9 @@
 #include <cstdlib>
-#include "List.h"
-
+#include "RecipeList.h"
 
 int main()
 {
+  /*
   Recipe Sandwich("Sandwich", 5, 10);
   Sandwich.setRecipeName("Sandwich");
   Sandwich.setCookingTime(5);
@@ -16,5 +16,9 @@ int main()
   Sandwich.getPreparationTime();
   Sandwich.getIngredientSize();
   Sandwich.printIngredients();
+  */
+  RecipeList currentList = RecipeList();
+  currentList.addRecipe();
+  currentList.getCurrentRecipe()->printIngredients();
   return 0;
 }

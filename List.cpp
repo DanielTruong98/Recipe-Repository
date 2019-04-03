@@ -14,9 +14,12 @@ Recipe::Recipe(std::string name, int cTime, int pTime){
 
 //Setters
 void Recipe::addIngredient(std::string item){
-  ingredients.push_back(item);
+  ingredient.push_back(item);
 }
 
+void Recipe::addIngredientAmount(std::string amount){
+  ingredientAmount.push_back(amount);
+}
 void Recipe::setRecipeName(std::string name){
   recipeName = name;
 }
@@ -45,12 +48,12 @@ int Recipe::getPreparationTime(){
 }
 
 int Recipe::getIngredientSize(){
-  std::cout << "Amount of ingredients: " << ingredients.size() << std::endl;
-  return ingredients.size();
+  std::cout << "Amount of ingredients: " << ingredient.size() << std::endl;
+  return ingredient.size();
 }
 
 void Recipe::printIngredients(){
-  for (auto i = ingredients.begin(); i != ingredients.end(); i++){
+  for (auto i = ingredient.begin(); i != ingredient.end(); i++){
     std::cout << *i << " ";
   }
   std::cout << std::endl;

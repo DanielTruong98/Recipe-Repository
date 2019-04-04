@@ -4,7 +4,7 @@
 RecipeList::RecipeList(){
   nextRecipe = NULL;
   previousRecipe = NULL;
-  current = NULL;
+  current = new Recipe();
 }
 
 
@@ -28,7 +28,7 @@ void RecipeList::addRecipe(){
   std::cout << "Input preparation time: ";
   std::cin >> pTime;
   std::cout << std::endl;
-  Recipe* temp = new Recipe(rName, cTime, pTime);
+  //Recipe* temp = new Recipe(rName, cTime, pTime);
 
   std::cout << "Input ingredient name with amount and unit after a :\n";
   std::cout << "Example: water:10ml\n";
@@ -41,15 +41,12 @@ void RecipeList::addRecipe(){
       size_t location = input.find(c);
       std::string tempName = input.substr(0, location);
       std::string tempAmount = input.substr(location + 1, input.size() - location);
-      temp->addIngredient(tempName);
-      temp->addIngredientAmount(tempAmount);
+      current->addIngredient(tempName);
+      current->addIngredientAmount(tempAmount);
     }
     else{
       ingredientInput = true;
     }
-  }
-  if (!current){
-    temp = current;
   }
 }
 

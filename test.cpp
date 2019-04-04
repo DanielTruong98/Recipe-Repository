@@ -19,6 +19,8 @@ int main()
   */
   RecipeList currentList = RecipeList();
   currentList.addRecipe();
-  currentList.getCurrentRecipe()->printIngredients();
+  Recipe* temporary = currentList.getCurrentRecipe();
+  temporary->printIngredients();
+
   return 0;
 }

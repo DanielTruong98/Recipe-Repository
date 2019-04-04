@@ -16,13 +16,14 @@ public:
   bool listFull();
   bool listEmpty();
   Recipe* getCurrentRecipe();
-  Recipe* getNextRecipe();
-  Recipe* getPreviousRecipe();
+  int findCurrentSpot(int val);
   //Sort recipe by name
   //Search through recipes
+  Recipe* findRecipe(std::string rName);
 private:
+  int currentplace;
   std::vector<Recipe> listRecipe;
+  Recipe* front;
+  Recipe* back;
   Recipe* current;
-  Recipe* nextRecipe;
-  Recipe* previousRecipe;
 };

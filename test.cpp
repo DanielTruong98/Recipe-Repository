@@ -21,6 +21,7 @@ int main()
   currentList.addRecipe();
   Recipe* temporary = currentList.getCurrentRecipe();
   temporary->printIngredients();
+  currentList.findRecipe("1");
 
   return 0;
 }

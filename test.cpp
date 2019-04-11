@@ -20,8 +20,11 @@ int main()
   RecipeList currentList = RecipeList();
   currentList.addRecipe();
   Recipe* temporary = currentList.getCurrentRecipe();
+  temporary->getRecipeName();
+
   temporary->printIngredients();
   currentList.findRecipe("1");
   currentList.removeRecipe("1");
+  currentList.findRecipe("1");
   return 0;
 }

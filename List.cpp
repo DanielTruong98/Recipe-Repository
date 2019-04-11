@@ -4,7 +4,7 @@
 Recipe::Recipe(){
   cookingTime = 0;
   preparationTime = 0;
-  recipeName = "Unknown";
+  recipeName = "";
 }
 Recipe::Recipe(std::string name, int cTime, int pTime){
   recipeName = name;
@@ -53,6 +53,7 @@ int Recipe::getIngredientSize(){
 }
 
 void Recipe::printIngredients(){
+  std::cout << "Printing ingredients." << std::endl;
   for (auto i = ingredient.begin(); i != ingredient.end(); i++){
     std::cout << *i << std::endl;
   }

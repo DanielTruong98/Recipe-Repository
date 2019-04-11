@@ -33,6 +33,10 @@ void RecipeList::addRecipe(){
 
     // Creates new Recipe object with rName, cTime, pTime
     // Ingredient and amount added to vectors in while loop
+
+    if (current.cookingTime == 0 && current.preparationTime == 0 && recipeName == ""){
+      //edit original recipe
+    }
     Recipe* temp = new Recipe(rName, cTime, pTime);
     if (temp == NULL){
       std::cout << "error with new recipe" << std::endl;
@@ -50,6 +54,8 @@ void RecipeList::addRecipe(){
         size_t location = input.find(c);
         std::string tempName = input.substr(0, location);
         std::string tempAmount = input.substr(location + 1, input.size() - location);
+        std::cout << "tempName: " << tempName << std::endl;
+        std::cout << "tempAmount: " << tempAmount << std::endl;
         temp->addIngredient(tempName);
         temp->addIngredientAmount(tempAmount);
       }
@@ -66,7 +72,8 @@ void RecipeList::addRecipe(){
 void RecipeList::removeRecipe(std::string rName){
   for (auto i = listRecipe.begin(); i != listRecipe.end(); i++){
     if (i->getRecipeName() == rName){
-      std::cout << "Found " << rName << " in list. Now removing" << std::endl;
+      std::cout << "Found " << rName << " in list.\n";
+      std::cout << "Now removing\n";
       listRecipe.erase(i);
       listRecipe.shrink_to_fit();
       return;
@@ -90,9 +97,9 @@ int RecipeList::findCurrentSpot(int val){
 void RecipeList::findRecipe(std::string rName){
   for (int i = 0; i < listRecipe.size(); i++){
     if (listRecipe[i].getRecipeName() == rName){
-      std::cout << rName << " found in list" << std::endl;
+      std::cout << rName << " found in list\n";
       return;
     }
   }
-  std::cout << rName << " not found in list" << std::endl;
+  std::cout << rName << " not found in list\n";
 }

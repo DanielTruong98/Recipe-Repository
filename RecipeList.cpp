@@ -87,14 +87,12 @@ int RecipeList::findCurrentSpot(int val){
 
 }
 
-Recipe* RecipeList::findRecipe(std::string rName){
-  for (auto i = listRecipe.begin(); i != listRecipe.end(); i++){
-    if (i->getRecipeName() == rName){
-      std::cout << rName << " found in list\n";
-      //TODO Find a way to convert iterator to reference of element in vector
-      Recipe* ret = listRecipe.at(i);
-      return ret;
+void RecipeList::findRecipe(std::string rName){
+  for (int i = 0; i < listRecipe.size(); i++){
+    if (listRecipe[i].getRecipeName() == rName){
+      std::cout << rName << " found in list" << std::endl;
+      return;
     }
   }
-  std::cout << rName << " not found in list\n";
+  std::cout << rName << " not found in list" << std::endl;
 }

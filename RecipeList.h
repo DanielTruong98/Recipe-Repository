@@ -18,8 +18,7 @@ public:
   Recipe* getCurrentRecipe();
   int findCurrentSpot(int val);
   //Sort recipe by name
-  //Search through recipes
-  Recipe* findRecipe(std::string rName);
+  void findRecipe(std::string rName);
 private:
   int currentplace;
   std::vector<Recipe> listRecipe;

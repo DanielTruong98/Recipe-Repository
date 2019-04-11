@@ -11,6 +11,13 @@ RecipeList::RecipeList(){
 
 //setters
 void RecipeList::addRecipe(){
+
+    Recipe* temp = new Recipe();
+    if (temp == NULL){
+      std::cout << "error with new recipe" << std::endl;
+      abort();
+    }
+
     std::string rName;
     int cTime;
     int pTime;
@@ -30,9 +37,9 @@ void RecipeList::addRecipe(){
     std::cin >> pTime;
     std::cout << std::endl;
 
-    current->setRecipeName(rName);
-    current->setCookingTime(cTime);
-    current->setPreparationTime(pTime);
+    temp->setRecipeName(rName);
+    temp->setCookingTime(cTime);
+    temp->setPreparationTime(pTime);
 
     std::cout << "Input ingredient name with amount and unit after a :\n";
     std::cout << "Example: water:10ml\n";
@@ -45,12 +52,16 @@ void RecipeList::addRecipe(){
         size_t location = input.find(c);
         std::string tempName = input.substr(0, location);
         std::string tempAmount = input.substr(location + 1, input.size() - location);
-        current->addIngredient(tempName);
-        current->addIngredientAmount(tempAmount);
+        temp->addIngredient(tempName);
+        temp->addIngredientAmount(tempAmount);
       }
       else{
         ingredientInput = true;
       }
+    }
+    listRecipe.push_back(*temp);
+    if (listRecipe.front().getRecipeName() == rName){
+      std::cout << "Successfully pushed back " << rName << std::endl;
     }
 }
 
@@ -68,7 +79,7 @@ int RecipeList::findCurrentSpot(int val){
 }
 
 Recipe* RecipeList::findRecipe(std::string rName){
-  if (current->getRecipeName() == rName){
+  if (listRecipe.front().getRecipeName() == rName){
     std::cout << rName << " found in list\n";
   }
   else{

@@ -22,6 +22,6 @@ int main()
   Recipe* temporary = currentList.getCurrentRecipe();
   temporary->printIngredients();
   currentList.findRecipe("1");
-
+  currentList.removeRecipe("1");
   return 0;
 }

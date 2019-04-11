@@ -12,12 +12,6 @@ RecipeList::RecipeList(){
 //setters
 void RecipeList::addRecipe(){
 
-    Recipe* temp = new Recipe();
-    if (temp == NULL){
-      std::cout << "error with new recipe" << std::endl;
-      abort();
-    }
-
     std::string rName;
     int cTime;
     int pTime;
@@ -37,9 +31,13 @@ void RecipeList::addRecipe(){
     std::cin >> pTime;
     std::cout << std::endl;
 
-    temp->setRecipeName(rName);
-    temp->setCookingTime(cTime);
-    temp->setPreparationTime(pTime);
+    // Creates new Recipe object with rName, cTime, pTime
+    // Ingredient and amount added to vectors in while loop
+    Recipe* temp = new Recipe(rName, cTime, pTime);
+    if (temp == NULL){
+      std::cout << "error with new recipe" << std::endl;
+      abort();
+    }
 
     std::cout << "Input ingredient name with amount and unit after a :\n";
     std::cout << "Example: water:10ml\n";
@@ -65,6 +63,17 @@ void RecipeList::addRecipe(){
     }
 }
 
+void RecipeList::removeRecipe(std::string rName){
+  for (auto i = listRecipe.begin(); i != listRecipe.end(); i++){
+    if (i->getRecipeName() == rName){
+      std::cout << "Found " << rName << " in list. Now removing" << std::endl;
+      listRecipe.erase(i);
+      listRecipe.shrink_to_fit();
+      return;
+    }
+  }
+  std::cout << rName << " not found in list." << std::endl;
+}
 //getters
 int RecipeList::recipeAmount(){
   return listRecipe.size();
@@ -79,10 +88,13 @@ int RecipeList::findCurrentSpot(int val){
 }
 
 Recipe* RecipeList::findRecipe(std::string rName){
-  if (listRecipe.front().getRecipeName() == rName){
-    std::cout << rName << " found in list\n";
+  for (auto i = listRecipe.begin(); i != listRecipe.end(); i++){
+    if (i->getRecipeName() == rName){
+      std::cout << rName << " found in list\n";
+      //TODO Find a way to convert iterator to reference of element in vector
+      Recipe* ret = listRecipe.at(i);
+      return ret;
+    }
   }
-  else{
-    std::cout << rName << " not found in list\n";
-  }
+  std::cout << rName << " not found in list\n";
 }

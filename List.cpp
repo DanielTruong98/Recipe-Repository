@@ -54,7 +54,7 @@ int Recipe::getIngredientSize(){
 
 void Recipe::printIngredients(){
   for (auto i = ingredient.begin(); i != ingredient.end(); i++){
-    std::cout << *i << " ";
+    std::cout << *i << std::endl;
   }
   std::cout << std::endl;
 }

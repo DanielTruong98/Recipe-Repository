@@ -19,6 +19,7 @@ int main()
   */
   RecipeList currentList = RecipeList();
   currentList.addRecipe();
+
   Recipe* temporary = currentList.getCurrentRecipe();
   temporary->getRecipeName();
 

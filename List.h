@@ -16,6 +16,7 @@ public:
   void setRecipeName(std::string name);
   void setCookingTime(int cTime);
   void setPreparationTime(int pTime);
+  void inputInstructions();
   //Sort ingredients by name
 
 //getters
@@ -33,6 +34,7 @@ public:
 private:
   std::vector<std::string> ingredient;
   std::vector<std::string> ingredientAmount;
+  std::vector<std::string> instructions;
   int cookingTime;
   int preparationTime;
   std::string recipeName;

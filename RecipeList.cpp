@@ -2,7 +2,7 @@
 
 //Declaration
 RecipeList::RecipeList(){
-  currentplace = 0;
+  
 }
 
 
@@ -50,14 +50,16 @@ void RecipeList::addRecipe(){
         std::string tempAmount = input.substr(location + 1, input.size() - location);
         //std::cout << "tempName: " << tempName << std::endl;
         //std::cout << "tempAmount: " << tempAmount << std::endl;
-        temp->addIngredient(tempName);
-        temp->addIngredientAmount(tempAmount);
+        if (tempName != "" || tempAmount != ""){
+          temp->addIngredient(tempName);
+          temp->addIngredientAmount(tempAmount);
+        }
       }
       else{
         ingredientInput = true;
       }
     }
-    listRecipe.push_back(*  temp);
+    listRecipe.push_back(*temp);
 
     if (listRecipe.back().getRecipeName() == rName){
       std::cout << "Successfully pushed back " << rName << std::endl;
@@ -81,7 +83,7 @@ void RecipeList::removeRecipe(std::string rName){
       return;
     }
   }
-  std::cout << rName << " not found in list." << std::endl;
+  std::cout << rName << " not found in list" << std::endl;
 }
 //getters
 int RecipeList::recipeAmount(){
@@ -97,10 +99,6 @@ Recipe* RecipeList::getCurrentRecipe(){
     throw "current recipe NULL";
   }
   return current;
-}
-
-int RecipeList::findCurrentSpot(int val){
-
 }
 
 Recipe* RecipeList::findRecipe(std::string rName){

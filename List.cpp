@@ -13,10 +13,16 @@ Recipe::Recipe(std::string name, int cTime, int pTime){
 //Setters
 void Recipe::addIngredient(std::string item){
   ingredient.push_back(item);
+  if (ingredient.back() == item){
+    std::cout << "Pushed back: " << item << std::endl;
+  }
 }
 
 void Recipe::addIngredientAmount(std::string amount){
   ingredientAmount.push_back(amount);
+  if (ingredientAmount.back() == amount){
+    std::cout << "Pushed back: " << amount << std::endl;
+  }
 }
 void Recipe::setRecipeName(std::string name){
   recipeName = name;
@@ -31,13 +37,7 @@ void Recipe::setPreparationTime(int pTime){
 }
 //Getters
 std::string Recipe::getRecipeName(){
-  if (recipeName.empty()){
-    std::cout << "Error: No recipe name\n";
-    return "Error";
-  }
-  else{
     return recipeName;
-  }
 }
 
 int Recipe::getCookingTime(){
@@ -68,8 +68,11 @@ void Recipe::printPreparationTime(){
 
 void Recipe::printIngredients(){
   std::cout << "Printing ingredients." << std::endl;
+  int count = 0;
   for (auto i = ingredient.begin(); i != ingredient.end(); i++){
+    std::cout << "Loop: " << count << std::endl;
     std::cout << *i << std::endl;
+    count++;
   }
   std::cout << std::endl;
 }

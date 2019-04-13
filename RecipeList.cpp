@@ -30,11 +30,6 @@ void RecipeList::addRecipe(){
 
     // Creates new Recipe object with rName, cTime, pTime
     // Ingredient and amount added to vectors in while loop
-    /*
-    if (current.cookingTime == 0 && current.preparationTime == 0 && recipeName == ""){
-      //edit original recipe
-    }
-    */
     Recipe* temp = new Recipe(rName, cTime, pTime);
     if (temp == NULL){
       std::cout << "error with new recipe" << std::endl;
@@ -63,13 +58,12 @@ void RecipeList::addRecipe(){
       }
     }
     listRecipe.push_back(*  temp);
-    /*
-    if (listRecipe.front().getRecipeName() == rName){
+
+    if (listRecipe.back().getRecipeName() == rName){
       std::cout << "Successfully pushed back " << rName << std::endl;
     }
-    */
 
-    //std::cout << "Size: " << listRecipe.size() << std::endl;
+
     ///If there is only 1 recipe in the vector
     ///Make it the current recipe
     if (listRecipe.size() == 1){

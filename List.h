@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <stdio.h>
 
 class Recipe
 {
@@ -22,7 +23,13 @@ public:
   int getCookingTime();
   int getPreparationTime();
   int getIngredientSize();
+
+//printers
+  void printRecipeName();
+  void printCookingTime();
+  void printPreparationTime();
   void printIngredients();
+
 private:
   std::vector<std::string> ingredient;
   std::vector<std::string> ingredientAmount;

@@ -3,8 +3,6 @@
 //Declaration
 RecipeList::RecipeList(){
   currentplace = 0;
-  front = current;
-  back = current;
 }
 
 
@@ -50,12 +48,13 @@ void RecipeList::addRecipe(){
     while(ingredientInput == false){
       char c = ':';
       std::getline(std::cin, input);
+      //TODO input string check to ensure a colon is inputted
       if (input != "exit"){
         size_t location = input.find(c);
         std::string tempName = input.substr(0, location);
         std::string tempAmount = input.substr(location + 1, input.size() - location);
-        std::cout << "tempName: " << tempName << std::endl;
-        std::cout << "tempAmount: " << tempAmount << std::endl;
+        //std::cout << "tempName: " << tempName << std::endl;
+        //std::cout << "tempAmount: " << tempAmount << std::endl;
         temp->addIngredient(tempName);
         temp->addIngredientAmount(tempAmount);
       }
@@ -64,17 +63,25 @@ void RecipeList::addRecipe(){
       }
     }
     listRecipe.push_back(*  temp);
+    /*
     if (listRecipe.front().getRecipeName() == rName){
       std::cout << "Successfully pushed back " << rName << std::endl;
     }
-    std::cout << listRecipe.front().getRecipeName() << std::endl;
+    */
+
+    //std::cout << "Size: " << listRecipe.size() << std::endl;
+    ///If there is only 1 recipe in the vector
+    ///Make it the current recipe
+    if (listRecipe.size() == 1){
+      //std::cout << "Current size is 1 so setting current to front\n";
+      current = &(listRecipe.front());
+    }
 }
 
 void RecipeList::removeRecipe(std::string rName){
   for (auto i = listRecipe.begin(); i != listRecipe.end(); i++){
     if (i->getRecipeName() == rName){
-      std::cout << "Found " << rName << " in list.\n";
-      std::cout << "Now removing\n";
+      std::cout << "Removing " << rName << " from list.\n";
       listRecipe.erase(i);
       listRecipe.shrink_to_fit();
       return;
@@ -87,7 +94,14 @@ int RecipeList::recipeAmount(){
   return listRecipe.size();
 }
 
+bool RecipeList::listEmpty(){
+  return listRecipe.empty();
+}
+
 Recipe* RecipeList::getCurrentRecipe(){
+  if (current == NULL){
+    throw "current recipe NULL";
+  }
   return current;
 }
 
@@ -95,12 +109,19 @@ int RecipeList::findCurrentSpot(int val){
 
 }
 
-void RecipeList::findRecipe(std::string rName){
+Recipe* RecipeList::findRecipe(std::string rName){
   for (int i = 0; i < listRecipe.size(); i++){
     if (listRecipe[i].getRecipeName() == rName){
-      std::cout << rName << " found in list\n";
-      return;
+      //std::cout << rName << " found in list\n";
+      return &(listRecipe[i]);
     }
   }
   std::cout << rName << " not found in list\n";
+}
+
+void RecipeList::printRecipeNames(){
+  for (int i = 0; i < listRecipe.size(); i++){
+    std::cout << "ListRecipe positon " << i << " contains " << listRecipe[i].getRecipeName() << std::endl;
+  }
+  std::cout << std::endl;
 }

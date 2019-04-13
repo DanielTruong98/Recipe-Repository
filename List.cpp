@@ -2,9 +2,7 @@
 
 //Declaration
 Recipe::Recipe(){
-  cookingTime = 0;
-  preparationTime = 0;
-  recipeName = "";
+
 }
 Recipe::Recipe(std::string name, int cTime, int pTime){
   recipeName = name;
@@ -33,23 +31,39 @@ void Recipe::setPreparationTime(int pTime){
 }
 //Getters
 std::string Recipe::getRecipeName(){
-  std::cout << "Recipe Name: " << recipeName << std::endl;
-  return recipeName;
+  if (recipeName.empty()){
+    std::cout << "Error: No recipe name\n";
+    return "Error";
+  }
+  else{
+    return recipeName;
+  }
 }
 
 int Recipe::getCookingTime(){
-  std::cout << "Cooking Time: " << cookingTime << std::endl;
   return cookingTime;
 }
 
 int Recipe::getPreparationTime(){
-  std::cout << "Preparation Time: " << preparationTime << std::endl;
   return preparationTime;
 }
 
 int Recipe::getIngredientSize(){
-  std::cout << "Amount of ingredients: " << ingredient.size() << std::endl;
   return ingredient.size();
+}
+
+//Printers
+
+void Recipe::printRecipeName(){
+  std::cout << "Recipe Name: " << recipeName << std::endl;
+}
+
+void Recipe::printCookingTime(){
+  std::cout << "Cooking Time: " << cookingTime << std::endl;
+}
+
+void Recipe::printPreparationTime(){
+  std::cout << "Preparation Time: " << preparationTime << std::endl;
 }
 
 void Recipe::printIngredients(){

@@ -12,11 +12,13 @@ int main()
   Recipe* temporary = currentList.findRecipe("val");
   temporary->printRecipeName();
   temporary->printIngredients();
+  temporary->printInstructions();
 
   currentList.addRecipe();
   Recipe* temporary2 = currentList.findRecipe("val2");
   temporary2->printRecipeName();
   temporary2->printIngredients();
+  temporary->printInstructions();
 
   currentList.removeRecipe("val");
   currentList.findRecipe("val");
@@ -27,7 +29,7 @@ int main()
 //TODO List
 /*
 Fix printIngredients-DONE
-Implement cooking directions
+Implement cooking directions-DONE
 Find recipes with specific ingredients
 Export data
 Import data

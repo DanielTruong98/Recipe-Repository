@@ -1,8 +1,9 @@
 #include "RecipeList.h"
+#include <sstream>
 
 //Declaration
 RecipeList::RecipeList(){
-  
+
 }
 
 
@@ -12,6 +13,7 @@ void RecipeList::addRecipe(){
     std::string rName;
     int cTime;
     int pTime;
+    std::string inputVals;
     bool ingredientInput = false;
 
     std::string input;
@@ -20,12 +22,26 @@ void RecipeList::addRecipe(){
     std::getline (std::cin, rName);
     std::cout << std::endl;
 
-    std::cout << "Input cooking time: ";
-    std::cin >> cTime;
+    while(true){
+      std::cout << "Input cooking time: ";
+      std::getline (std::cin, inputVals);
+      std::stringstream myStream(inputVals);
+      if (myStream >> cTime){
+        break;
+      }
+      std::cout << "Invalid input. Enter a number.\n";
+    }
     std::cout << std::endl;
 
-    std::cout << "Input preparation time: ";
-    std::cin >> pTime;
+    while(true){
+      std::cout << "Input preparation time: ";
+      std::getline (std::cin, inputVals);
+      std::stringstream myStream1(inputVals);
+      if (myStream1 >> pTime){
+        break;
+      }
+      std::cout << "Invalid input. Enter a number.\n";
+    }
     std::cout << std::endl;
 
     // Creates new Recipe object with rName, cTime, pTime
@@ -40,31 +56,30 @@ void RecipeList::addRecipe(){
     std::cout << "Example: water:10ml\n";
     std::cout << "When finished inputting ingredients, type exit to leave ingredient input\n";
 
-    while(ingredientInput == false){
+    while(true){
       char c = ':';
       std::getline(std::cin, input);
       //TODO input string check to ensure a colon is inputted
-      if (input != "exit"){
-        size_t location = input.find(c);
-        std::string tempName = input.substr(0, location);
-        std::string tempAmount = input.substr(location + 1, input.size() - location);
-        //std::cout << "tempName: " << tempName << std::endl;
-        //std::cout << "tempAmount: " << tempAmount << std::endl;
-        if (tempName != "" || tempAmount != ""){
-          temp->addIngredient(tempName);
-          temp->addIngredientAmount(tempAmount);
-        }
+      if (input == "exit"){
+          break;
       }
-      else{
-        ingredientInput = true;
+      size_t location = input.find(c);
+      std::string tempName = input.substr(0, location);
+      std::string tempAmount = input.substr(location + 1, input.size() - location);
+      //std::cout << "tempName: " << tempName << std::endl;
+      //std::cout << "tempAmount: " << tempAmount << std::endl;
+      if (tempName != "" || tempAmount != ""){
+        temp->addIngredient(tempName);
+        temp->addIngredientAmount(tempAmount);
       }
     }
+    temp->inputInstructions();
     listRecipe.push_back(*temp);
-
+    /*
     if (listRecipe.back().getRecipeName() == rName){
       std::cout << "Successfully pushed back " << rName << std::endl;
     }
-
+    */
 
     ///If there is only 1 recipe in the vector
     ///Make it the current recipe

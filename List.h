@@ -30,6 +30,7 @@ public:
   void printCookingTime();
   void printPreparationTime();
   void printIngredients();
+  void printInstructions();
 
 private:
   std::vector<std::string> ingredient;

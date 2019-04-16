@@ -31,7 +31,17 @@ void Recipe::setPreparationTime(int pTime){
 }
 
 void Recipe::inputInstructions(){
-
+  std::string input;
+  std::cout << "Enter instructions.\n";
+  std::cout << "When finished, type exit.\n";
+  while(true){
+    std::getline(std::cin, input);
+    if (input == "exit"){
+      break;
+    }
+    instructions.push_back(input);
+    input.clear();
+  }
 }
 //Getters
 std::string Recipe::getRecipeName(){
@@ -65,10 +75,18 @@ void Recipe::printPreparationTime(){
 }
 
 void Recipe::printIngredients(){
-  std::cout << "Printing ingredients" << std::endl;
+  std::cout << "Printing ingredients\n";
   int count = 0;
   for (int i = 0; i < ingredient.size(); i++){
     std::cout << ingredient[i] << std::endl;
+  }
+  std::cout << std::endl;
+}
+
+void Recipe::printInstructions(){
+  std::cout << "Printing instructions\n";
+  for (int i = 0; i < instructions.size(); i++){
+    std::cout << i + 1 << ". " << instructions[i] << std::endl;
   }
   std::cout << std::endl;
 }

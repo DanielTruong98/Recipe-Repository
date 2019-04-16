@@ -15,7 +15,7 @@ public:
   int recipeAmount();
   bool listEmpty();
   Recipe* getCurrentRecipe();
-  //Sort recipe by most common ingredients
+  //Sort recipe by most frequent ingredients
   Recipe* findRecipe(std::string rName);
   void printRecipeNames();
   Recipe* findByIngredient(std::string ingr);

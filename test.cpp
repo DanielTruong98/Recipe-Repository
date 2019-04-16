@@ -20,8 +20,8 @@ int main()
   temporary2->printIngredients();
   temporary->printInstructions();
 
-  currentList.removeRecipe("val");
-  currentList.findRecipe("val");
+  //currentList.removeRecipe("val");
+  //currentList.findRecipe("val");
   cout << "FBI\n";
   currentList.findByIngredient("1");
   return 0;
@@ -33,7 +33,7 @@ int main()
 PRINT INSTRUCTIONS MAY NOT WORK!
 Fix printIngredients-DONE
 Implement cooking directions-DONE
-Find recipes with specific ingredients
+Find recipes with specific ingredients-DONE
 Export data
 Import data
 ********************************************

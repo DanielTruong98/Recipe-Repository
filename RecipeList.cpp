@@ -1,4 +1,5 @@
 #include "RecipeList.h"
+#include <fstream>
 #include <sstream>
 
 //Declaration
@@ -58,7 +59,13 @@ void RecipeList::addRecipe(){
 
     while(true){
       char c = ':';
-      std::getline(std::cin, input);
+      while(true){
+        std::getline(std::cin, input);
+        if (input.find(c) != -1 || input == "exit"){
+          break;
+        }
+        std::cout << "Ensure there is a colon when inputting\n";
+      }
       //TODO input string check to ensure a colon is inputted
       if (input == "exit"){
           break;
@@ -84,7 +91,6 @@ void RecipeList::addRecipe(){
     ///If there is only 1 recipe in the vector
     ///Make it the current recipe
     if (listRecipe.size() == 1){
-      //std::cout << "Current size is 1 so setting current to front\n";
       current = &(listRecipe.front());
     }
 }

@@ -132,3 +132,16 @@ void RecipeList::printRecipeNames(){
   }
   std::cout << std::endl;
 }
+
+Recipe* RecipeList::findByIngredient(std::string ingr){
+  std::vector<Recipe> resList;
+  for (int i = 0; i < listRecipe.size(); i++){
+    for (int j = 0; j < listRecipe[i].getIngredient().size(); j++){
+      if(listRecipe[i].getIngredient()[j] == ingr){
+        std::cout << "Found ingredient in: " << listRecipe[i].getRecipeName() << std::endl;
+        resList.push_back(listRecipe[i]);
+      }
+    }
+  }
+
+}

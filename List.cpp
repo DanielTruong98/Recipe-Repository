@@ -60,6 +60,10 @@ int Recipe::getIngredientSize(){
   return ingredient.size();
 }
 
+std::vector<std::string> Recipe::getIngredient(){
+  return ingredient;
+}
+
 //Printers
 
 void Recipe::printRecipeName(){

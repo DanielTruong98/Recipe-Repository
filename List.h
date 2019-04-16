@@ -24,6 +24,7 @@ public:
   int getCookingTime();
   int getPreparationTime();
   int getIngredientSize();
+  std::vector<std::string> getIngredient();
 
 //printers
   void printRecipeName();

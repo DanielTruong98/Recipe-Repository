@@ -9,12 +9,10 @@ int main()
   RecipeList currentList = RecipeList();
 
   currentList.addRecipe();
-  Recipe* temporary = currentList.findRecipe("val");
-  temporary->printRecipeName();
-  temporary->printIngredients();
-  temporary->printInstructions();
-
-  currentList.exportRecipe("val");
+  currentList.addRecipe();
+  currentList.addRecipe();
+  
+  currentList.exportAll();
   /*
   currentList.addRecipe();
   Recipe* temporary2 = currentList.findRecipe("val2");

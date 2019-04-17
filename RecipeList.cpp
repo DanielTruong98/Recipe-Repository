@@ -110,17 +110,19 @@ void RecipeList::removeRecipe(std::string rName){
 void RecipeList::exportRecipe(std::string rName){
   Recipe* currentRecipe = this->findRecipe(rName);
   std::ofstream myFile;
-  myFile.open("export.txt");
+  myFile.open("export.txt", std::ofstream::app);
   myFile << "Recipe Name: " << rName << std::endl;
-  myFile << "Cooking Time: " << currentRecipe->getCookingTime() << std::endl;
   myFile << "Preparation Time: " << currentRecipe->getPreparationTime() << std::endl;
-  myFile << "Ingredients\n";
-  for (int i = 0; i < currentRecipe->getIngredientSize(); i++){
-    myFile << currentRecipe->getIngredient()[i] << ":" << currentRecipe->getIngredientAmount()[i] << std::endl;
+  myFile << "Cooking Time: " << currentRecipe->getCookingTime() << std::endl;
+
+  myFile << "\nIngredients:\n";
+  for (int ingred = 0; ingred < currentRecipe->getIngredientSize(); ingred++){
+    myFile << currentRecipe->getIngredient()[ingred] << ":" << currentRecipe->getIngredientAmount()[ingred] << std::endl;
   }
-  myFile << "Instructions\n";
-  for (int i = 0; i < currentRecipe->getInstructions().size(); i++){
-    myFile << currentRecipe->getInstructions()[i] << std::endl;
+
+  myFile << "\nInstructions:\n";
+  for (int instruc = 0; instruc < currentRecipe->getInstructions().size(); instruc++){
+    myFile << instruc + 1 << ". " << currentRecipe->getInstructions()[instruc] << std::endl;
   }
   // ~ character used to separate recipes
   myFile << "~\n";
@@ -128,7 +130,25 @@ void RecipeList::exportRecipe(std::string rName){
 }
 
 void RecipeList::exportAll(){
+  std::ofstream myFile;
+  myFile.open("export.txt", std::ofstream::app);
+  for (int i = 0; i < this->recipeAmount(); i++){
+    myFile << "Recipe Name: " << listRecipe.at(i).getRecipeName() << std::endl;
+    myFile << "Preparation Time: " << listRecipe.at(i).getPreparationTime() << std::endl;
+    myFile << "Cooking Time: " << listRecipe.at(i).getCookingTime() << std::endl;
 
+    myFile << "\nIngredients:\n";
+    for (int ingred = 0; ingred < listRecipe.at(i).getIngredientSize(); ingred++){
+      myFile << listRecipe.at(i).getIngredient()[ingred] << ":" << listRecipe.at(i).getIngredientAmount()[ingred] << std::endl;
+    }
+
+    myFile << "\nInstructions:\n";
+    for (int instruc = 0; instruc < listRecipe.at(i).getInstructions().size(); instruc++){
+      myFile << instruc + 1 << ". " << listRecipe.at(i).getInstructions()[instruc] << std::endl;
+    }
+    myFile << "~\n";
+  }
+  myFile.close();
 }
 //getters
 int RecipeList::recipeAmount(){

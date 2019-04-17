@@ -64,6 +64,13 @@ std::vector<std::string> Recipe::getIngredient(){
   return ingredient;
 }
 
+std::vector<std::string> Recipe::getIngredientAmount(){
+  return ingredientAmount;
+}
+
+std::vector<std::string> Recipe::getInstructions(){
+  return instructions;
+}
 //Printers
 
 void Recipe::printRecipeName(){

@@ -108,11 +108,27 @@ void RecipeList::removeRecipe(std::string rName){
 }
 
 void RecipeList::exportRecipe(std::string rName){
-
+  Recipe* currentRecipe = this->findRecipe(rName);
+  std::ofstream myFile;
+  myFile.open("export.txt");
+  myFile << "Recipe Name: " << rName << std::endl;
+  myFile << "Cooking Time: " << currentRecipe->getCookingTime() << std::endl;
+  myFile << "Preparation Time: " << currentRecipe->getPreparationTime() << std::endl;
+  myFile << "Ingredients\n";
+  for (int i = 0; i < currentRecipe->getIngredientSize(); i++){
+    myFile << currentRecipe->getIngredient()[i] << ":" << currentRecipe->getIngredientAmount()[i] << std::endl;
+  }
+  myFile << "Instructions\n";
+  for (int i = 0; i < currentRecipe->getInstructions().size(); i++){
+    myFile << currentRecipe->getInstructions()[i] << std::endl;
+  }
+  // ~ character used to separate recipes
+  myFile << "~\n";
+  myFile.close();
 }
 
-void RecipeList::exportAll(std::string rName){
-  
+void RecipeList::exportAll(){
+
 }
 //getters
 int RecipeList::recipeAmount(){

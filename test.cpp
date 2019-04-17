@@ -14,6 +14,8 @@ int main()
   temporary->printIngredients();
   temporary->printInstructions();
 
+  currentList.exportRecipe("val");
+  /*
   currentList.addRecipe();
   Recipe* temporary2 = currentList.findRecipe("val2");
   temporary2->printRecipeName();
@@ -24,6 +26,7 @@ int main()
   //currentList.findRecipe("val");
   cout << "FBI\n";
   currentList.findByIngredient("1");
+  */
   return 0;
 }
 

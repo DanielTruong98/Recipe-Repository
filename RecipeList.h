@@ -10,6 +10,8 @@ public:
   void addRecipe();
   void removeRecipe(std::string rName);
   void changeRecipe(int select);
+  void exportRecipe(std::string rName);
+  void exportAll();
 
 //getters
   int recipeAmount();

@@ -106,6 +106,14 @@ void RecipeList::removeRecipe(std::string rName){
   }
   std::cout << rName << " not found in list" << std::endl;
 }
+
+void RecipeList::exportRecipe(std::string rName){
+
+}
+
+void RecipeList::exportAll(std::string rName){
+  
+}
 //getters
 int RecipeList::recipeAmount(){
   return listRecipe.size();
@@ -140,6 +148,7 @@ void RecipeList::printRecipeNames(){
 }
 
 Recipe* RecipeList::findByIngredient(std::string ingr){
+  Recipe* results[listRecipe.size()];
   std::vector<Recipe> resList;
   for (int i = 0; i < listRecipe.size(); i++){
     for (int j = 0; j < listRecipe[i].getIngredient().size(); j++){
@@ -149,5 +158,4 @@ Recipe* RecipeList::findByIngredient(std::string ingr){
       }
     }
   }
-
 }

@@ -11,7 +11,7 @@ int main()
   currentList.addRecipe();
   currentList.addRecipe();
   currentList.addRecipe();
-  
+
   currentList.exportAll();
   /*
   currentList.addRecipe();
@@ -35,7 +35,7 @@ PRINT INSTRUCTIONS MAY NOT WORK!
 Fix printIngredients-DONE
 Implement cooking directions-DONE
 Find recipes with specific ingredients-DONE
-Export data
+Export data-DONE
 Import data
 ********************************************
 //Possible features

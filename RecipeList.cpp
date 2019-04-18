@@ -193,15 +193,12 @@ void RecipeList::importRecipe(){
   inFile.open("import.txt", std::ifstream::in);
   std::string line;
   getline(inFile, line);
-  std::cout << "Line1: " << line << std::endl;
   loc = line.find(c);
   rName = line.substr(loc + 2, line.size() - 12); // 13 is length of Recipe Name: ignore space
   getline(inFile, line);
-  std::cout << "Line2: " << line << std::endl;
   loc = line.find(c);
   std::stringstream(line.substr(loc + 1, line.size() - 17)) >> pTime;
   getline(inFile, line);
-  std::cout << "Line3: " << line << std::endl;
   loc = line.find(c);
   std::stringstream(line.substr(loc + 1, line.size() - 13)) >> cTime;
   std::cout << "tName: " << rName << std::endl;
@@ -211,19 +208,32 @@ void RecipeList::importRecipe(){
   getline(inFile,line);
   getline(inFile,line);
   getline(inFile,line);
-  while(line.find("Instructions") == std::string::npos){
-    loc = line.find(c);
-    std::string tempName = line.substr(0, loc);
-    std::string tempAmount = line.substr(loc + 1, line.size() - loc);
+  std::cout << "LastLine: " << line << std::endl;
+  while(true){
+    if (line == "\n"){
+      break;
+    }
+    std::cout << "P\n";
+    size_t location = line.find(c);
+    std::cout << loc << std::endl;
+    std::string tempName = line.substr(0, location);
+    std::string tempAmount = line.substr(loc + 1, line.size() - location);
     if (tempName != "" || tempAmount != ""){
       tempRecipe->addIngredient(tempName);
       tempRecipe->addIngredientAmount(tempAmount);
     }
+    getline(inFile, line);
   }
-  while(line.find("~") == std::string::npos){
+  while(true){
+    if (line == "~"){
+      break;
+    }
     tempRecipe->getInstructions().push_back(line.substr(3, line.size()));
+    getline(inFile, line);
   }
   listRecipe.push_back(*tempRecipe);
+  line.clear();
+  inFile.close();
 }
 
 int RecipeList::recipeBegin(){

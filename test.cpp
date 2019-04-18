@@ -8,11 +8,12 @@ int main()
 {
   RecipeList currentList = RecipeList();
 
-  currentList.addRecipe();
-  currentList.addRecipe();
-  currentList.addRecipe();
+  currentList.importRecipe();
 
-  currentList.exportAll();
+  Recipe* temp = currentList.findRecipe("1");
+  temp->printRecipeName();
+  temp->printIngredients();
+  temp->printInstructions();
   /*
   currentList.addRecipe();
   Recipe* temporary2 = currentList.findRecipe("val2");

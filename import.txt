@@ -1,0 +1,30 @@
+Recipe Name: 1
+Preparation Time: 1
+Cooking Time: 1
+
+Ingredients:
+1:1
+
+Instructions:
+1. fin
+~
+Recipe Name: 2
+Preparation Time: 2
+Cooking Time: 2
+
+Ingredients:
+2:2
+
+Instructions:
+1. fin2
+~
+Recipe Name: 3
+Preparation Time: 3
+Cooking Time: 3
+
+Ingredients:
+3:3
+
+Instructions:
+1. fin3
+~

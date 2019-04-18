@@ -21,6 +21,11 @@ public:
   Recipe* findRecipe(std::string rName);
   void printRecipeNames();
   Recipe* findByIngredient(std::string ingr);
+
+  int recipeBegin();
+
+  void importRecipe();
+  void importAll();
 private:
   std::vector<Recipe> listRecipe;
   Recipe* current;

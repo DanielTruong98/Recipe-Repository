@@ -133,20 +133,7 @@ void RecipeList::exportAll(){
   std::ofstream myFile;
   myFile.open("export.txt", std::ofstream::app);
   for (int i = 0; i < this->recipeAmount(); i++){
-    myFile << "Recipe Name: " << listRecipe.at(i).getRecipeName() << std::endl;
-    myFile << "Preparation Time: " << listRecipe.at(i).getPreparationTime() << std::endl;
-    myFile << "Cooking Time: " << listRecipe.at(i).getCookingTime() << std::endl;
-
-    myFile << "\nIngredients:\n";
-    for (int ingred = 0; ingred < listRecipe.at(i).getIngredientSize(); ingred++){
-      myFile << listRecipe.at(i).getIngredient()[ingred] << ":" << listRecipe.at(i).getIngredientAmount()[ingred] << std::endl;
-    }
-
-    myFile << "\nInstructions:\n";
-    for (int instruc = 0; instruc < listRecipe.at(i).getInstructions().size(); instruc++){
-      myFile << instruc + 1 << ". " << listRecipe.at(i).getInstructions()[instruc] << std::endl;
-    }
-    myFile << "~\n";
+    this->exportRecipe(listRecipe[i].getRecipeName());
   }
   myFile.close();
 }
@@ -194,4 +181,51 @@ Recipe* RecipeList::findByIngredient(std::string ingr){
       }
     }
   }
+}
+
+void RecipeList::importRecipe(){
+  std::string rName;
+  int pTime;
+  int cTime;
+  char c = ':';
+  size_t loc;
+  std::ifstream inFile;
+  inFile.open("import.txt", std::ifstream::in);
+  std::string line;
+  getline(inFile, line);
+  std::cout << "Line1: " << line << std::endl;
+  loc = line.find(c);
+  rName = line.substr(loc + 2, line.size() - 12); // 13 is length of Recipe Name: ignore space
+  getline(inFile, line);
+  std::cout << "Line2: " << line << std::endl;
+  loc = line.find(c);
+  std::stringstream(line.substr(loc + 1, line.size() - 17)) >> pTime;
+  getline(inFile, line);
+  std::cout << "Line3: " << line << std::endl;
+  loc = line.find(c);
+  std::stringstream(line.substr(loc + 1, line.size() - 13)) >> cTime;
+  std::cout << "tName: " << rName << std::endl;
+  std::cout << "pTime: " << pTime << std::endl;
+  std::cout << "cTime: " << cTime << std::endl;
+  Recipe* tempRecipe = new Recipe(rName, cTime, pTime);
+  getline(inFile,line);
+  getline(inFile,line);
+  getline(inFile,line);
+  while(line.find("Instructions") == std::string::npos){
+    loc = line.find(c);
+    std::string tempName = line.substr(0, loc);
+    std::string tempAmount = line.substr(loc + 1, line.size() - loc);
+    if (tempName != "" || tempAmount != ""){
+      tempRecipe->addIngredient(tempName);
+      tempRecipe->addIngredientAmount(tempAmount);
+    }
+  }
+  while(line.find("~") == std::string::npos){
+    tempRecipe->getInstructions().push_back(line.substr(3, line.size()));
+  }
+  listRecipe.push_back(*tempRecipe);
+}
+
+int RecipeList::recipeBegin(){
+
 }

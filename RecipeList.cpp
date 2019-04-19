@@ -187,7 +187,7 @@ void RecipeList::importRecipe(){
   std::string rName;
   int pTime;
   int cTime;
-  char c = ':';
+  std::string c = ":";
   size_t loc;
   std::ifstream inFile;
   inFile.open("import.txt", std::ifstream::in);
@@ -205,37 +205,49 @@ void RecipeList::importRecipe(){
   std::cout << "pTime: " << pTime << std::endl;
   std::cout << "cTime: " << cTime << std::endl;
   Recipe* tempRecipe = new Recipe(rName, cTime, pTime);
-  getline(inFile,line);
-  getline(inFile,line);
-  getline(inFile,line);
-  std::cout << "LastLine: " << line << std::endl;
+  getline(inFile, line);
+  getline(inFile, line);
+  getline(inFile, line);
   while(true){
-    if (line == "\n"){
+    if (line.length() == 0){
       break;
     }
-    std::cout << "P\n";
-    size_t location = line.find(c);
-    std::cout << loc << std::endl;
+    size_t location;
+    for (int i = 0; i < line.size(); i++){
+      if (line[i] == ':'){
+        location = i;
+      }
+    }
     std::string tempName = line.substr(0, location);
-    std::string tempAmount = line.substr(loc + 1, line.size() - location);
+    std::string tempAmount = line.substr(location + 1, line.size() - location -1);
     if (tempName != "" || tempAmount != ""){
       tempRecipe->addIngredient(tempName);
       tempRecipe->addIngredientAmount(tempAmount);
     }
     getline(inFile, line);
   }
+  getline(inFile, line);
+  getline(inFile, line);
   while(true){
     if (line == "~"){
       break;
     }
-    tempRecipe->getInstructions().push_back(line.substr(3, line.size()));
+    std::cout << "Line: " << line << std::endl;
+    std::string instr = line.substr(3, line.size() - 3);
+    tempRecipe->addInstruction(instr);
     getline(inFile, line);
+    std::cout << "BB\n";
   }
   listRecipe.push_back(*tempRecipe);
-  line.clear();
+  this->printRecipeNames();
   inFile.close();
 }
 
-int RecipeList::recipeBegin(){
-
+int RecipeList::findColon(std::string var){
+  for (int i = 0; i < var.size(); i++){
+    if (var[i] == ':'){
+      return i;
+    }
+  }
+  return -1;
 }

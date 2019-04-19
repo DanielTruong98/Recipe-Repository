@@ -22,7 +22,7 @@ public:
   void printRecipeNames();
   Recipe* findByIngredient(std::string ingr);
 
-  int recipeBegin();
+  int findColon(std::string var);
 
   void importRecipe();
   void importAll();

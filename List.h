@@ -13,6 +13,7 @@ public:
 //setters
   void addIngredient(std::string item);
   void addIngredientAmount(std::string amount);
+  void addInstruction(std::string instr);
   void setRecipeName(std::string name);
   void setCookingTime(int cTime);
   void setPreparationTime(int pTime);

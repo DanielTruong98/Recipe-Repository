@@ -18,6 +18,10 @@ void Recipe::addIngredient(std::string item){
 void Recipe::addIngredientAmount(std::string amount){
   ingredientAmount.push_back(amount);
 }
+
+void Recipe::addInstruction(std::string instr){
+  instructions.push_back(instr);
+}
 void Recipe::setRecipeName(std::string name){
   recipeName = name;
 }

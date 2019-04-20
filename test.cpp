@@ -8,18 +8,18 @@ int main()
 {
   RecipeList currentList = RecipeList();
 
-  currentList.importRecipe();
-
-  Recipe* temp = currentList.findRecipe("1");
-  temp->printRecipeName();
-  temp->printIngredients();
-  temp->printInstructions();
-  /*
-  currentList.addRecipe();
-  Recipe* temporary2 = currentList.findRecipe("val2");
+  currentList.importAll();
+  Recipe* temporary2 = currentList.findRecipe("r2");
   temporary2->printRecipeName();
   temporary2->printIngredients();
-  temporary->printInstructions();
+  temporary2->printInstructions();
+
+  currentList.findByIngredient("a");
+  /*
+  currentList.addRecipe();
+
+
+
 
   //currentList.removeRecipe("val");
   //currentList.findRecipe("val");
@@ -37,7 +37,8 @@ Fix printIngredients-DONE
 Implement cooking directions-DONE
 Find recipes with specific ingredients-DONE
 Export data-DONE
-Import data
+Import data-DONE
+Flip ingredient and ingredient amount
 ********************************************
 //Possible features
 Frequency statistic

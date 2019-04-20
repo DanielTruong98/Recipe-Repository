@@ -1,30 +1,85 @@
-Recipe Name: 1
+Recipe Name: r1
 Preparation Time: 1
 Cooking Time: 1
 
 Ingredients:
-1:1
+a:1
+b:2
+c:3
+d:4
+e:5
+f:6
+g:7
+h:8
+i:9
+j:10
 
 Instructions:
 1. fin1
+2. fin2
+3. fin3
+4. fin4
+5. fin5
+6. fin6
+7. fin7
+8. fin8
+9. fin9
+10. fin10
 ~
-Recipe Name: 2
+Recipe Name: r2
 Preparation Time: 2
 Cooking Time: 2
 
 Ingredients:
-2:2
+a:1
+b:2
+c:3
+d:4
+e:5
+f:6
+g:7
+h:8
+i:9
+j:10
 
 Instructions:
-1. fin2
+1. fin1
+2. fin2
+3. fin3
+4. fin4
+5. fin5
+6. fin6
+7. fin7
+8. fin8
+9. fin9
+10. fin10
 ~
-Recipe Name: 3
+Recipe Name: r3
 Preparation Time: 3
 Cooking Time: 3
 
 Ingredients:
-3:3
+a:1
+b:2
+c:3
+d:4
+e:5
+f:6
+g:7
+h:8
+i:9
+j:10
 
 Instructions:
-1. fin3
+1. fin1
+2. fin2
+3. fin3
+4. fin4
+5. fin5
+6. fin6
+7. fin7
+8. fin8
+9. fin9
+10. fin10
 ~
+END_OF_FILE

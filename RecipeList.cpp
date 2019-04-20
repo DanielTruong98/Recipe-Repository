@@ -135,6 +135,7 @@ void RecipeList::exportAll(){
   for (int i = 0; i < this->recipeAmount(); i++){
     this->exportRecipe(listRecipe[i].getRecipeName());
   }
+  myFile << "END_OF_FILE\n";
   myFile.close();
 }
 //getters
@@ -183,71 +184,132 @@ Recipe* RecipeList::findByIngredient(std::string ingr){
   }
 }
 
-void RecipeList::importRecipe(){
-  std::string rName;
+void RecipeList::importRecipe(std::string rName){
   int pTime;
   int cTime;
-  std::string c = ":";
-  size_t loc;
-  std::ifstream inFile;
-  inFile.open("import.txt", std::ifstream::in);
+  int colonPos;
+  int dotPos;
+
+  std::ifstream myFile;
   std::string line;
-  getline(inFile, line);
-  loc = line.find(c);
-  rName = line.substr(loc + 2, line.size() - 12); // 13 is length of Recipe Name: ignore space
-  getline(inFile, line);
-  loc = line.find(c);
-  std::stringstream(line.substr(loc + 1, line.size() - 17)) >> pTime;
-  getline(inFile, line);
-  loc = line.find(c);
-  std::stringstream(line.substr(loc + 1, line.size() - 13)) >> cTime;
-  std::cout << "tName: " << rName << std::endl;
-  std::cout << "pTime: " << pTime << std::endl;
-  std::cout << "cTime: " << cTime << std::endl;
-  Recipe* tempRecipe = new Recipe(rName, cTime, pTime);
-  getline(inFile, line);
-  getline(inFile, line);
-  getline(inFile, line);
-  while(true){
-    if (line.length() == 0){
+  std::string tester = "Recipe Name: ";
+  tester.append(rName);
+  myFile.open("import.txt", std::ifstream::in);
+  getline(myFile, line);
+
+  //Searching for specified recipe
+  while(line != tester){
+    if(line == tester){
       break;
     }
-    size_t location;
-    for (int i = 0; i < line.size(); i++){
-      if (line[i] == ':'){
-        location = i;
-      }
-    }
-    std::string tempName = line.substr(0, location);
-    std::string tempAmount = line.substr(location + 1, line.size() - location -1);
-    if (tempName != "" || tempAmount != ""){
-      tempRecipe->addIngredient(tempName);
-      tempRecipe->addIngredientAmount(tempAmount);
-    }
-    getline(inFile, line);
+    getline(myFile, line);
   }
-  getline(inFile, line);
-  getline(inFile, line);
+  //At this point, reached the specified recipe
+
+  //Read in pTime
+  getline(myFile, line);
+  line = line.substr(18, line.size() - 18);
+  std::stringstream(line) >> pTime;
+
+  //Read in cTime
+  getline(myFile, line);
+  line = line.substr(14, line.size() - 14);
+  std::stringstream(line) >> cTime;
+
+  //Skipping lines until ingredients
+  getline(myFile, line);
+  getline(myFile, line);
+  getline(myFile, line);
+
+  //Create Recipe object with parameters from above
+  Recipe* tempRecipe = new Recipe(rName, cTime, pTime);
+
+  //Getting ingredient + amount
+  while(true){
+    if (line == ""){
+      break;
+    }
+    colonPos = line.find(":");
+    std::cout << "Line: " << line << std::endl;
+    tempRecipe->addIngredient(line.substr(0, colonPos));
+    tempRecipe->addIngredientAmount(line.substr(colonPos + 1, line.size() - colonPos - 1));
+    getline(myFile, line);
+  }
+  getline(myFile, line);
+  getline(myFile, line);
+
+  //Getting instructions
   while(true){
     if (line == "~"){
       break;
     }
-    std::cout << "Line: " << line << std::endl;
-    std::string instr = line.substr(3, line.size() - 3);
-    tempRecipe->addInstruction(instr);
-    getline(inFile, line);
-    std::cout << "BB\n";
+    dotPos = line.find(".");
+    tempRecipe->addInstruction(line.substr(dotPos + 1, line.size() - dotPos + 1));
+    getline(myFile, line);
   }
   listRecipe.push_back(*tempRecipe);
-  this->printRecipeNames();
-  inFile.close();
+  myFile.close();
 }
+void RecipeList::importAll(){
+  std::string rName;
+  int pTime;
+  int cTime;
 
-int RecipeList::findColon(std::string var){
-  for (int i = 0; i < var.size(); i++){
-    if (var[i] == ':'){
-      return i;
+  int colonPos;
+  int dotPos;
+
+  std::ifstream myFile;
+  std::string line;
+  myFile.open("import.txt", std::ifstream::in);
+  getline(myFile, line);
+  while(true){
+    if (line == "END_OF_FILE"){
+      break;
     }
+    rName = line.substr(13, line.size() - 13);
+    //Read in pTime
+    getline(myFile, line);
+    line = line.substr(18, line.size() - 18);
+    std::stringstream(line) >> pTime;
+
+    //Read in cTime
+    getline(myFile, line);
+    line = line.substr(14, line.size() - 14);
+    std::stringstream(line) >> cTime;
+
+    //Skipping lines until ingredients
+    getline(myFile, line);
+    getline(myFile, line);
+    getline(myFile, line);
+
+    //Create Recipe object with parameters from above
+    Recipe* tempRecipe = new Recipe(rName, cTime, pTime);
+
+    //Getting ingredient + amount
+    while(true){
+      if (line == ""){
+        break;
+      }
+      colonPos = line.find(":");
+      tempRecipe->addIngredient(line.substr(0, colonPos));
+      tempRecipe->addIngredientAmount(line.substr(colonPos + 1, line.size() - colonPos - 1));
+      getline(myFile, line);
+    }
+    getline(myFile, line);
+    getline(myFile, line);
+
+    //Getting instructions
+    while(true){
+      if (line == "~"){
+        break;
+      }
+      dotPos = line.find(".");
+      tempRecipe->addInstruction(line.substr(dotPos + 1, line.size() - dotPos + 1));
+      //std::cout << "Line: " << line << std::endl;
+      getline(myFile, line);
+    }
+    listRecipe.push_back(*tempRecipe);
+    getline(myFile, line);
   }
-  return -1;
+  myFile.close();
 }

@@ -43,6 +43,12 @@ void Recipe::inputInstructions(){
     if (input == "exit"){
       break;
     }
+    while(true){
+      if (input != ""){
+        break;
+      }
+      std::cout << "Enter an intstruction\n";
+    }
     instructions.push_back(input);
     input.clear();
   }

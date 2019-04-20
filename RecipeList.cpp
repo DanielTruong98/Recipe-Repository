@@ -131,12 +131,17 @@ void RecipeList::exportRecipe(std::string rName){
 
 void RecipeList::exportAll(){
   std::ofstream myFile;
-  myFile.open("export.txt", std::ofstream::app);
-  for (int i = 0; i < this->recipeAmount(); i++){
-    this->exportRecipe(listRecipe[i].getRecipeName());
+  if (!this->listEmpty()){
+    myFile.open("export.txt", std::ofstream::app);
+    for (int i = 0; i < this->recipeAmount(); i++){
+      this->exportRecipe(listRecipe[i].getRecipeName());
+    }
+    myFile << "END_OF_FILE\n";
+    myFile.close();
   }
-  myFile << "END_OF_FILE\n";
-  myFile.close();
+  else{
+    std::cout << "List is empty\n";
+  }
 }
 //getters
 int RecipeList::recipeAmount(){

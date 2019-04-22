@@ -109,16 +109,18 @@ void RecipeList::removeRecipe(std::string rName){
 
 void RecipeList::changeRecipe(std::string rName){
   Recipe* target = NULL;
-  int iter = 0;
   std::string input;
   int selection;
 
-  while(target == NULL){
-    if (listRecipe[iter]->getRecipeName == rName){
-      break;
+  for (int i = 0; i < listRecipe.size(); i++){
+    if (listRecipe[i].getRecipeName() == rName){
+      target = &listRecipe[i];
     }
-    iter++;
   }
+  std::cout << "Current recipe: ";
+  target->printRecipeName();
+  std::cout << std::endl;
+
   std::cout << "Enter option number\n";
   std::cout << "1. Change recipe name.\n";
   std::cout << "2. Change recipe cooking time.\n";
@@ -128,28 +130,35 @@ void RecipeList::changeRecipe(std::string rName){
   std::cout << "6. Insert ingredient.\n";
   std::cout << "7. Remove ingredient.\n";
   std::cout << "8. Remove recipe.\n";
-  // Need to check if input within 1-8
+  std::cout << "\n";
   while(true){
     std::getline (std::cin, input);
     std::stringstream myStream(input);
     if (myStream >> selection){
-      break;
+      if (selection >= 1 && selection <= 8){
+        break;
+      }
     }
-    std::cout << "Invalid input. Enter a number.\n";
+    std::cout << "Invalid input. Enter a number between 1 and 8.\n";
   }
   switch(selection){
     case 1:
+    {
       std::string newRName;
       std::cout << "Enter new recipe name: ";
       getline(std::cin, newRName);
       target->setRecipeName(newRName);
+      target->printRecipeName();
       break;
+    }
     case 2:
+    {
       int newCTime;
       std::string userInput;
+      target->printCookingTime();
       std::cout << "Enter new cooking time: ";
       while(true){
-        getline(std::string, userInput);
+        getline(std::cin, userInput);
         std::stringstream myStream(userInput);
         if (myStream >> newCTime){
           break;
@@ -157,13 +166,17 @@ void RecipeList::changeRecipe(std::string rName){
         std::cout << "Invalid input. Enter a number.\n";
       }
       target->setCookingTime(newCTime);
+      target->printCookingTime();
       break;
+    }
     case 3:
+    {
       int newPTime;
       std::string userInput;
+      target->printPreparationTime();
       std::cout << "Enter new preparation time: ";
       while(true){
-        getline(std::string, userInput);
+        getline(std::cin, userInput);
         std::stringstream myStream(userInput);
         if (myStream >> newPTime){
           break;
@@ -171,8 +184,38 @@ void RecipeList::changeRecipe(std::string rName){
         std::cout << "Invalid input. Enter a number.\n";
       }
       target->setPreparationTime(newPTime);
+      target->printPreparationTime();
       break;
+    }
     case 4:
+    {
+      std::string userInput;
+      int input;
+      int instructionSize = target->getInstructions().size();
+      target->printInstructions();
+      std::cout << "Select the point where you want to insert your instruction: ";
+      while(true){
+        getline(std::cin, userInput);
+        std::stringstream myStream(userInput);
+        if (myStream >> input){
+          if (target->getInstructions().size() >= 0){
+            if (input >= 0 && input <= instructionSize){
+              break;
+            }
+          }
+        }
+        std::cout << "Invalid input. Enter a valid number.\n";
+      }
+      std::cout << "Enter the instruction you want to input\n";
+      getline(std::cin, userInput);
+      std::string tempInstruction = target->getInstructions()[input];
+      target->getInstructions().resize(instructionSize + 1);
+      for (int i = instructionSize - 1; i > input; i--){
+        target->getInstructions()[i] = target->getInstructions()[i - 1];
+      }
+      target->getInstructions()[input] = userInput;
+    }
+    target->printInstructions();
 
   }
   std::cout << std::endl;

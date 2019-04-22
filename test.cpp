@@ -8,18 +8,17 @@ int main()
 {
   RecipeList currentList = RecipeList();
 
-  currentList.exportAll();
-  /*
-  currentList.addRecipe();
+  currentList.importAll();
+  currentList.changeRecipe("r2");
 
 
 
 
   //currentList.removeRecipe("val");
   //currentList.findRecipe("val");
-  cout << "FBI\n";
-  currentList.findByIngredient("1");
-  */
+  //cout << "FBI\n";
+  //currentList.findByIngredient("1");
+
   return 0;
 }
 

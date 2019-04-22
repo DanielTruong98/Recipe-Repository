@@ -107,6 +107,77 @@ void RecipeList::removeRecipe(std::string rName){
   std::cout << rName << " not found in list" << std::endl;
 }
 
+void RecipeList::changeRecipe(std::string rName){
+  Recipe* target = NULL;
+  int iter = 0;
+  std::string input;
+  int selection;
+
+  while(target == NULL){
+    if (listRecipe[iter]->getRecipeName == rName){
+      break;
+    }
+    iter++;
+  }
+  std::cout << "Enter option number\n";
+  std::cout << "1. Change recipe name.\n";
+  std::cout << "2. Change recipe cooking time.\n";
+  std::cout << "3. Change recipe preparation time.\n";
+  std::cout << "4. Insert instruction.\n";
+  std::cout << "5. Remove instruction.\n";
+  std::cout << "6. Insert ingredient.\n";
+  std::cout << "7. Remove ingredient.\n";
+  std::cout << "8. Remove recipe.\n";
+  // Need to check if input within 1-8
+  while(true){
+    std::getline (std::cin, input);
+    std::stringstream myStream(input);
+    if (myStream >> selection){
+      break;
+    }
+    std::cout << "Invalid input. Enter a number.\n";
+  }
+  switch(selection){
+    case 1:
+      std::string newRName;
+      std::cout << "Enter new recipe name: ";
+      getline(std::cin, newRName);
+      target->setRecipeName(newRName);
+      break;
+    case 2:
+      int newCTime;
+      std::string userInput;
+      std::cout << "Enter new cooking time: ";
+      while(true){
+        getline(std::string, userInput);
+        std::stringstream myStream(userInput);
+        if (myStream >> newCTime){
+          break;
+        }
+        std::cout << "Invalid input. Enter a number.\n";
+      }
+      target->setCookingTime(newCTime);
+      break;
+    case 3:
+      int newPTime;
+      std::string userInput;
+      std::cout << "Enter new preparation time: ";
+      while(true){
+        getline(std::string, userInput);
+        std::stringstream myStream(userInput);
+        if (myStream >> newPTime){
+          break;
+        }
+        std::cout << "Invalid input. Enter a number.\n";
+      }
+      target->setPreparationTime(newPTime);
+      break;
+    case 4:
+
+  }
+  std::cout << std::endl;
+}
+
 void RecipeList::exportRecipe(std::string rName){
   Recipe* currentRecipe = this->findRecipe(rName);
   std::ofstream myFile;

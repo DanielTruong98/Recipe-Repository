@@ -22,6 +22,19 @@ void Recipe::addIngredientAmount(std::string amount){
 void Recipe::addInstruction(std::string instr){
   instructions.push_back(instr);
 }
+
+void Recipe::swapInstruction(int a, int b){
+  std::string temp = instructions[a];
+  instructions[a] = instructions[b];
+  instructions[b] = temp;
+}
+
+void Recipe::removeInstruction(int a){
+  auto iter = instructions.begin() + a - 1;
+  instructions.erase(iter);
+  instructions.shrink_to_fit();
+}
+
 void Recipe::setRecipeName(std::string name){
   recipeName = name;
 }

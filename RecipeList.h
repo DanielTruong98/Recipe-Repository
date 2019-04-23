@@ -9,7 +9,7 @@ public:
 //setters
   void addRecipe();
   void removeRecipe(std::string rName);
-  void changeRecipe(int select);
+  void changeRecipe(std::string rName);
   void exportRecipe(std::string rName);
   void exportAll();
 

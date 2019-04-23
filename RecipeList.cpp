@@ -1,6 +1,8 @@
 #include "RecipeList.h"
 #include <fstream>
 #include <sstream>
+#include <algorithm>
+
 
 //Declaration
 RecipeList::RecipeList(){
@@ -144,6 +146,7 @@ void RecipeList::changeRecipe(std::string rName){
   switch(selection){
     case 1:
     {
+      //change rname
       std::string newRName;
       std::cout << "Enter new recipe name: ";
       getline(std::cin, newRName);
@@ -153,6 +156,7 @@ void RecipeList::changeRecipe(std::string rName){
     }
     case 2:
     {
+      //change ctime
       int newCTime;
       std::string userInput;
       target->printCookingTime();
@@ -171,6 +175,7 @@ void RecipeList::changeRecipe(std::string rName){
     }
     case 3:
     {
+      //change ptime
       int newPTime;
       std::string userInput;
       target->printPreparationTime();
@@ -189,6 +194,7 @@ void RecipeList::changeRecipe(std::string rName){
     }
     case 4:
     {
+      //insert instruction
       std::string userInput;
       int input;
       int instructionSize = target->getInstructions().size();
@@ -206,16 +212,64 @@ void RecipeList::changeRecipe(std::string rName){
         }
         std::cout << "Invalid input. Enter a valid number.\n";
       }
+      input--;
       std::cout << "Enter the instruction you want to input\n";
       getline(std::cin, userInput);
-      std::string tempInstruction = target->getInstructions()[input];
-      target->getInstructions().resize(instructionSize + 1);
-      for (int i = instructionSize - 1; i > input; i--){
-        target->getInstructions()[i] = target->getInstructions()[i - 1];
+      target->addInstruction(userInput);
+
+      for (int i = target->getInstructions().size() - 1; i > input; i--){
+        target->swapInstruction(i, i - 1);
       }
-      target->getInstructions()[input] = userInput;
+      target->printInstructions();
+      break;
     }
-    target->printInstructions();
+    case 5:
+    {
+      //remove instruction
+      std::string userInput;
+      int input;
+      int instructionSize = target->getInstructions().size();
+      target->printInstructions();
+      std::cout << "Select the point where you want to remove your instruction: ";
+      while(true){
+        getline(std::cin, userInput);
+        std::stringstream myStream(userInput);
+        if (myStream >> input){
+          if (target->getInstructions().size() >= 0){
+            if (input >= 0 && input <= instructionSize){
+              break;
+            }
+          }
+        }
+        std::cout << "Invalid input. Enter a valid number.\n";
+      }
+      target->removeInstruction(input);
+      target->printInstructions();
+      break;
+    }
+    case 6:
+    {
+      //insert ingredient
+      std::string userInput;
+      char c = ':';
+      target->printIngredients();
+      std::cout << "Input ingredient name with amount and unit after a :\n";
+      std::cout << "Example: water:10ml\n";
+      getline(std::cin, userInput);
+      size_t location = userInput.find(c);
+      std::string tempName = userInput.substr(0, location);
+      std::string tempAmount = userInput.substr(location + 1, userInput.size() - location);
+      target->addIngredient(tempName);
+      target->addIngredientAmount(tempAmount);
+      target->printIngredients();
+      break;
+    }
+    case 7:
+    {
+      //remove ingredient
+      target->printIngredients();
+      std::string userInput;
+    }
 
   }
   std::cout << std::endl;
@@ -363,7 +417,7 @@ void RecipeList::importRecipe(std::string rName){
       break;
     }
     dotPos = line.find(".");
-    tempRecipe->addInstruction(line.substr(dotPos + 1, line.size() - dotPos + 1));
+    tempRecipe->addInstruction(line.substr(dotPos + 2, line.size() - dotPos + 2));
     getline(myFile, line);
   }
   listRecipe.push_back(*tempRecipe);
@@ -423,7 +477,7 @@ void RecipeList::importAll(){
         break;
       }
       dotPos = line.find(".");
-      tempRecipe->addInstruction(line.substr(dotPos + 1, line.size() - dotPos + 1));
+      tempRecipe->addInstruction(line.substr(dotPos + 2, line.size() - dotPos + 2));
       //std::cout << "Line: " << line << std::endl;
       getline(myFile, line);
     }

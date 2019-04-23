@@ -14,6 +14,8 @@ public:
   void addIngredient(std::string item);
   void addIngredientAmount(std::string amount);
   void addInstruction(std::string instr);
+  void swapInstruction(int a, int b);
+  void removeInstruction(int a);
   void setRecipeName(std::string name);
   void setCookingTime(int cTime);
   void setPreparationTime(int pTime);

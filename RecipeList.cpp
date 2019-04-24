@@ -131,13 +131,12 @@ void RecipeList::changeRecipe(std::string rName){
   std::cout << "5. Remove instruction.\n";
   std::cout << "6. Insert ingredient.\n";
   std::cout << "7. Remove ingredient.\n";
-  std::cout << "8. Remove recipe.\n";
   std::cout << "\n";
   while(true){
     std::getline (std::cin, input);
     std::stringstream myStream(input);
     if (myStream >> selection){
-      if (selection >= 1 && selection <= 8){
+      if (selection >= 1 && selection <= 7){
         break;
       }
     }

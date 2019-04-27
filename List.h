@@ -13,6 +13,7 @@ public:
 //setters
   void addIngredient(std::string item);
   void addIngredientAmount(std::string amount);
+  void removeIngredient(int pos);
   void addInstruction(std::string instr);
   void swapInstruction(int a, int b);
   void removeInstruction(int a);

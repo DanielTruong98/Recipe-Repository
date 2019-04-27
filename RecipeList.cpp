@@ -269,24 +269,33 @@ void RecipeList::changeRecipe(std::string rName){
       target->printIngredients();
       std::string userInput;
       char c = ':';
+      bool found = false;
       std::cout << "Enter name of ingredient and amount you want to remove followed by a :\n";
       while(true){
+        //TODO ensure there is at least 3 characters inside the userInput
         std::getline(std::cin, userInput);
-        if (input.find(c) != -1){
+        if (userInput.find(c) != -1){
           break;
         }
         std::cout << "Ensure there is a colon when inputting\n";
       }
       size_t location = userInput.find(c);
       std::string tempName = userInput.substr(0, location);
-      std::string tempAmount = userInput.substr(location + 1, userInput.size() - location);
+      //TODO remove specific amount of ingredient
+      //std::string tempAmount = userInput.substr(location + 1, userInput.size() - location);
 
       for (int i = 0; i < target->getIngredient().size(); i++){
-        if (ingredient[i] == tempName){
-
+        std::cout << target->getIngredient()[i] << std::endl;
+        if (target->getIngredient()[i] == tempName){
+          target->removeIngredient(i);
+          found = true;
+          target->printIngredients();
+          break;
         }
       }
-      std::cout << "Could not find " << userInput << " in ingredients\n";
+      if (!found){
+        std::cout << "Could not find " << tempName << " in ingredients\n";
+      }
       break;
     }
 

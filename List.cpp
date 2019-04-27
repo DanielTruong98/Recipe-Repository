@@ -19,6 +19,13 @@ void Recipe::addIngredientAmount(std::string amount){
   ingredientAmount.push_back(amount);
 }
 
+void Recipe::removeIngredient(int pos){
+  ingredient.erase(ingredient.begin() + pos);
+  ingredientAmount.erase(ingredientAmount.begin() + pos);
+  ingredient.shrink_to_fit();
+  ingredientAmount.shrink_to_fit();
+
+}
 void Recipe::addInstruction(std::string instr){
   instructions.push_back(instr);
 }

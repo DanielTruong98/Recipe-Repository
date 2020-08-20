@@ -304,7 +304,7 @@ void RecipeList::changeRecipe(std::string rName){
 }
 
 void RecipeList::exportRecipe(std::string rName){
-  Recipe* currentRecipe = this->findRecipe(rName);
+  Recipe* currentRecipe = this->getRecipe(rName);
   std::ofstream myFile;
   myFile.open("export.txt", std::ofstream::app);
   myFile << "Recipe Name: " << rName << std::endl;
@@ -355,7 +355,7 @@ Recipe* RecipeList::getCurrentRecipe(){
   return current;
 }
 
-Recipe* RecipeList::findRecipe(std::string rName){
+Recipe* RecipeList::getRecipe(std::string rName){
   for (int i = 0; i < listRecipe.size(); i++){
     if (listRecipe[i].getRecipeName() == rName){
       //std::cout << rName << " found in list\n";
@@ -366,6 +366,7 @@ Recipe* RecipeList::findRecipe(std::string rName){
 }
 
 void RecipeList::printRecipeNames(){
+  std::cout << "Available Recipes" << std::endl;
   for (int i = 0; i < listRecipe.size(); i++){
     std::cout << "ListRecipe positon " << i << " contains " << listRecipe[i].getRecipeName() << std::endl;
   }
@@ -506,11 +507,23 @@ void RecipeList::importAll(){
       }
       dotPos = line.find(".");
       tempRecipe->addInstruction(line.substr(dotPos + 2, line.size() - dotPos + 2));
-      //std::cout << "Line: " << line << std::endl;
       getline(myFile, line);
     }
     listRecipe.push_back(*tempRecipe);
     getline(myFile, line);
   }
   myFile.close();
+}
+
+bool RecipeList::findRecipe(std::string rName){
+  for (int i = 0; i < listRecipe.size(); i++){
+    if (listRecipe[i].getRecipeName() == rName){
+      return true;
+    }
+  }
+  return false;
+}
+//TODO
+void RecipeList::printRecipe(std::string rName){
+  Recipe* target =
 }

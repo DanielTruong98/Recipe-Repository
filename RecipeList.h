@@ -16,14 +16,15 @@ public:
 //getters
   int recipeAmount();
   bool listEmpty();
+  bool findRecipe(std::string rName);
   Recipe* getCurrentRecipe();
   //Sort recipe by most frequent ingredients
-  Recipe* findRecipe(std::string rName);
+  Recipe* getRecipe(std::string rName);
   void printRecipeNames();
   Recipe* findByIngredient(std::string ingr);
-
   void importRecipe(std::string rName);
   void importAll();
+  void printRecipe(std::string rName);
 private:
   std::vector<Recipe> listRecipe;
   Recipe* current;

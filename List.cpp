@@ -119,7 +119,7 @@ void Recipe::printIngredients(){
   std::cout << "Printing ingredients\n";
   int count = 0;
   for (int i = 0; i < ingredient.size(); i++){
-    std::cout << ingredient[i] << std::endl;
+    std::cout << ingredient[i] << " " << ingredientAmount[i] << std::endl;
   }
   std::cout << std::endl;
 }

@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-
+#include <cstdlib>
 
 //Declaration
 RecipeList::RecipeList(){
@@ -358,11 +358,9 @@ Recipe* RecipeList::getCurrentRecipe(){
 Recipe* RecipeList::getRecipe(std::string rName){
   for (int i = 0; i < listRecipe.size(); i++){
     if (listRecipe[i].getRecipeName() == rName){
-      //std::cout << rName << " found in list\n";
       return &(listRecipe[i]);
     }
   }
-  std::cout << rName << " not found in list\n";
 }
 
 void RecipeList::printRecipeNames(){
@@ -523,7 +521,24 @@ bool RecipeList::findRecipe(std::string rName){
   }
   return false;
 }
-//TODO
 void RecipeList::printRecipe(std::string rName){
-  Recipe* target =
+  Recipe* target = this->getRecipe(rName);
+  target->printRecipeName();
+  target->printCookingTime();
+  target->printPreparationTime();
+  target->printIngredients();
+  target->printInstructions();
+}
+
+void RecipeList::randomRecipe(){
+  srand(time(NULL));
+  if (listRecipe.size() > 0){
+    int selection = rand() % listRecipe.size();
+    std::cout << "rand: " << selection << std::endl;
+    Recipe* target = &listRecipe[selection];
+    this->printRecipe(target->getRecipeName());
+  }
+  else{
+    std::cout << "No recipes found.\n";
+  }
 }

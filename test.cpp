@@ -14,7 +14,6 @@ int main()
   RecipeList currentList = RecipeList();
 
   while(running){
-    std::cout << "Enter option number\n";
     std::cout << "1. Import recipes.\n";
     std::cout << "2. Add recipe.\n";
     std::cout << "3. Modify recipe.\n";
@@ -24,6 +23,7 @@ int main()
     std::cout << "7. Browse recipes.\n";
     std::cout << "8. Select recipe.\n";
     std::cout << "9. Exit program.\n";
+    std::cout << "Enter option number\n";
     std::cout << std::endl;
     while(true){
       std::getline (std::cin, input);
@@ -103,11 +103,24 @@ int main()
       //Find recipe by ingredients
       case 5:
       {
+        std::string input;
+        std::cout << "Enter ingredient name or Q to quit.\n";
+        std::getline(std::cin, input);
+        while(true){
+          if (input == "Q"){
+            break;
+          }
+          else{
+            currentList.findByIngredient(input);
+            break;
+          }
+        }
         break;
       }
       //Get random recipe
       case 6:
       {
+        currentList.randomRecipe();
         break;
       }
       //Browse recipes
@@ -120,6 +133,26 @@ int main()
       //Select recipe
       case 8:
       {
+        std::string input;
+        std::cout << "Enter the name of the recipe to display or Q to quit.\n";
+        std::getline(std::cin, input);
+        while(true){
+          if (input == "Q"){
+            break;
+          }
+          else{
+            bool found = currentList.findRecipe(input);
+            if (found){
+              currentList.printRecipe(input);
+              break;
+            }
+            else{
+              std::cout << "Recipe not found.\n";
+              std::cout << "Enter the name of the recipe to display or Q to quit.\n";
+              std::getline(std::cin, input);
+            }
+          }
+        }
         break;
       }
       //Exit program
@@ -129,19 +162,8 @@ int main()
         break;
       }
     }
+    std::cout << std::endl;
   }
-  // RecipeList currentList = RecipeList();
-  // currentList.importAll();
-  // currentList.printRecipeNames();
-  // currentList.changeRecipe("r2");
-
-
-
-
-  //currentList.removeRecipe("val");
-  //currentList.findRecipe("val");
-  //cout << "FBI\n";
-  //currentList.findByIngredient("1");
 
   return 0;
 }
@@ -149,13 +171,6 @@ int main()
 
 //TODO List
 /*
-PRINT INSTRUCTIONS MAY NOT WORK!
-Fix printIngredients-DONE
-Implement cooking directions-DONE
-Find recipes with specific ingredients-DONE
-Export data-DONE
-Import data-DONE
-Flip ingredient and ingredient amount
 ********************************************
 //Possible features
 Frequency statistic

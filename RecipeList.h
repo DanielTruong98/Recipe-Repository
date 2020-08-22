@@ -25,6 +25,7 @@ public:
   void importRecipe(std::string rName);
   void importAll();
   void printRecipe(std::string rName);
+  void randomRecipe();
 private:
   std::vector<Recipe> listRecipe;
   Recipe* current;

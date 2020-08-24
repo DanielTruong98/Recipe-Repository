@@ -68,15 +68,12 @@ void RecipeList::addRecipe(){
         }
         std::cout << "Ensure there is a colon when inputting\n";
       }
-      //TODO input string check to ensure a colon is inputted
       if (input == "exit"){
           break;
       }
       size_t location = input.find(c);
       std::string tempName = input.substr(0, location);
       std::string tempAmount = input.substr(location + 1, input.size() - location);
-      //std::cout << "tempName: " << tempName << std::endl;
-      //std::cout << "tempAmount: " << tempAmount << std::endl;
       if (tempName != "" || tempAmount != ""){
         temp->addIngredient(tempName);
         temp->addIngredientAmount(tempAmount);
@@ -84,11 +81,6 @@ void RecipeList::addRecipe(){
     }
     temp->inputInstructions();
     listRecipe.push_back(*temp);
-    /*
-    if (listRecipe.back().getRecipeName() == rName){
-      std::cout << "Successfully pushed back " << rName << std::endl;
-    }
-    */
 
     ///If there is only 1 recipe in the vector
     ///Make it the current recipe
@@ -272,7 +264,6 @@ void RecipeList::changeRecipe(std::string rName){
       bool found = false;
       std::cout << "Enter name of ingredient and amount you want to remove followed by a :\n";
       while(true){
-        //TODO ensure there is at least 3 characters inside the userInput
         std::getline(std::cin, userInput);
         if (userInput.find(c) != -1){
           break;
@@ -281,8 +272,6 @@ void RecipeList::changeRecipe(std::string rName){
       }
       size_t location = userInput.find(c);
       std::string tempName = userInput.substr(0, location);
-      //TODO remove specific amount of ingredient
-      //std::string tempAmount = userInput.substr(location + 1, userInput.size() - location);
 
       for (int i = 0; i < target->getIngredient().size(); i++){
         std::cout << target->getIngredient()[i] << std::endl;

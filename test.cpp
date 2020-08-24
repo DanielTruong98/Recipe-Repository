@@ -168,21 +168,3 @@ int main()
   return 0;
 }
 
-
-//TODO List
-/*
-********************************************
-//Possible features
-Frequency statistic
-
-Sorting system
-
-Find which ingredients are the most common throughout all recipes
-Whichever recipe contains the most common ingredients will be placed first in recipeList
-
-
-Searching by ingredients
-
-Returns array of pointers to recipes inside recipeList
-if ingredient exists inside recipe, add the recipe to the array of pointers
-*/
